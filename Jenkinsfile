@@ -14,9 +14,18 @@ pipeline {
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@${batianIp}'
                 sh 'scp * ubuntu@${batianIp}:/home/ubuntu'
                 sh 'chmod +x setup-ansible.sh'
-                sh 'sudo ./setup-ansible.sh'
                 }
                 echo 'Hello World'
+            }
+        }
+
+        stage('Run Script') {
+            steps {
+                sshagent(['ansible-server']) {
+
+                sh 'ssh -o StrictHostKeyChecking=nossh ubuntu@${batianIp}:/home/ubuntu/setup-ansible.sh'
+
+                }
             }
         }
     }
