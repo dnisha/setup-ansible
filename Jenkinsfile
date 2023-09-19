@@ -71,5 +71,22 @@ pipeline {
                 }
             }
         }
+
+        stage('Install consul') {
+
+            steps {
+
+                script {
+
+                    sshagent(['ansible-server']) {
+
+                        sh """
+                            ssh -o StrictHostKeyChecking=no ubuntu@${batianIp} '
+                                ansible-playbook Hashicorp-vault-consul-integration/consule/tests/test.yml'
+                           """
+                    }
+                }
+            }
+        }
     }
 }
