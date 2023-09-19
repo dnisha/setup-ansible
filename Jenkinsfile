@@ -14,7 +14,7 @@ pipeline {
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@${batianIp}'
                 sh 'scp * ubuntu@${batianIp}:/home/ubuntu'
                 sh 'chmod +x setup-ansible.sh'
-                sh './setup-ansible.sh'
+                sh 'sudo ./setup-ansible.sh'
                 }
                 echo 'Hello World'
             }
