@@ -15,6 +15,9 @@ pipeline {
                 script {
 
                     sshagent(['ansible-server']) {
+
+                        sh 'scp * ubuntu@${batianIp}:/home/ubuntu'
+                        
                         sh """
                             ssh -o StrictHostKeyChecking=no ubuntu@${batianIp} '
                                 sudo apt update -y &&
