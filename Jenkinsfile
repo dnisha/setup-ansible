@@ -64,8 +64,9 @@ pipeline {
                     sshagent(['ansible-server']) {
 
                         sh """
-                            ansible-playbook Hashicorp-vault-consul-integration/vault/tests/test.yml
-                        """
+                            ssh -o StrictHostKeyChecking=no ubuntu@${batianIp} '
+                                ansible-playbook Hashicorp-vault-consul-integration/vault/tests/test.yml'
+                           """
                     }
                 }
             }
