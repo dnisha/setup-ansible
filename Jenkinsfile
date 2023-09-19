@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-         stage('checkout ansible role') {
+        stage('checkout ansible role') {
 
             steps {
 
@@ -50,6 +50,22 @@ pipeline {
                             ssh -o StrictHostKeyChecking=no ubuntu@${batianIp} '
                                 git clone https://github.com/dnisha/Hashicorp-vault-consul-integration.git'
                            """
+                    }
+                }
+            }
+        }
+
+        stage('Install vault') {
+
+            steps {
+
+                script {
+
+                    sshagent(['ansible-server']) {
+
+                        sh """
+                            ansible-playbook Hashicorp-vault-consul-integration/vault/tests/test.yml
+                        """
                     }
                 }
             }
