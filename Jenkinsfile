@@ -48,6 +48,7 @@ pipeline {
 
                         sh """
                             ssh -o StrictHostKeyChecking=no ubuntu@${batianIp} '
+                                rm -rf Hashicorp-vault-consul-integration &&
                                 git clone https://github.com/dnisha/Hashicorp-vault-consul-integration.git'
                            """
                     }
